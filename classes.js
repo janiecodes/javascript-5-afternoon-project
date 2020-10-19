@@ -69,20 +69,19 @@ class Manager extends Employee {
     this.reports.push(employee);
   }
 
-  fire(employee){
-    this.reports.forEach((employee, index) => {
-      if(employee.index === employee){
-        this.reports.splice(index, 1)
-      }
-    })
+  fire(index){
+    this.reports.splice(index, 1)
   }
 }
+
 
 ////////// PROBLEM 3 //////////
 
 /*
-  Managers for Widget Co. get promoted when they get more employees, and get a bonus when they fire employees.
-  create a class ProgressiveManager that extends Manager.  A Progressive Manager has all of the same properties as a manager with the following additional properties:
+  Managers for Widget Co. get promoted when they get more employees, and get a bonus when they 
+  fire employees.
+  create a class ProgressiveManager that extends Manager.  A Progressive Manager has all of the 
+  same properties as a manager with the following additional properties:
     - title - default 'Not a manager'
     - bonus - default 0
 
@@ -105,8 +104,36 @@ class ProgressiveManager extends Manager {
     super(first_name, last_name, email, age, reports);
     this.title = 'Not a manager';
     this.bonus = 0;
+  
+  }
+  newTitle(employee){
+    if(this.reports.length === 0){
+      this.title = 'Not a manager'
+    }else if(this.reports.length < 4){
+      this.title = 'Barely Manager'
+    }else if(this.reports.length < 11){
+      this.title = 'Mostly Manager'
+    }else if(this.reports.length < 51){
+      this.title = 'Manager'
+    }else if(this.reports.length < 101){
+      this.title = 'Manager Plus'
+    }else{
+      this.title = 'Bestest Manager'
+    }
   }
 
+
+  hire(newEmployee){
+    super.hire(newEmployee)
+    this.newTitle()
+  }
+
+  fire(index){
+    super.fire(index)
+    this.bonus += 100;
+    this.newTitle(); 
+  }
+  
 }
 
 
@@ -134,23 +161,27 @@ class ProgressiveManager extends Manager {
 */
 
 //Code Here
-// class Machine(){
-//   constructors(widgets_made_count, wear_and_tear_count, needs_reboot){
-//     this.widgets_made_count = 0;
-//     this.wear_and_tear_count = 0;
-//     this.needs_reboot = false;
-//   }
-//   makeWidgets(number){
-//     return this.widgets_made_count += number 
-//   }
-//   fixMachine(){
-//     return this.needs_reboot = true;
-//   }
-//   reboot(){
-//     return function(){
-//       this.wear_and_tear_count -= 10;
-//       this.needs_reboot = false;
-//     }
-//   }
-// }
+class Machine {
+  constructor(widgets_made_count, wear_and_tear_count, needs_reboot){
+     this.widgets_made_count = 0;
+     this.wear_and_tear_count = 0;
+     this.needs_reboot = false;
+   }
+
+  makeWidgets(number){
+    this.widgets_made_count += number
+    this.wear_and_tear_count = Math.floor(this.widgets_made_count/50)
+   }
+
+  fixMachine(){
+    this.needs_reboot = true;
+   }
+
+  reboot(){
+    return () => {
+      this.wear_and_tear_count -= 10;
+      this.needs_reboot = false;
+    }
+  }
+}
 

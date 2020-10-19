@@ -137,7 +137,8 @@ var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up B
 ////////// PROBLEM 6 //////////
 
 /*
-  Inside the module's return object create a publicMethod function that invokes privateMethod (return the result).
+  Inside the module's return object create a publicMethod function that invokes privateMethod 
+  //(return the result).
   Invoke this by calling module.publicMethod(); outside the module scope
 */
 
@@ -155,10 +156,13 @@ var module = (function() {
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
   return {
-    // Code here.
+    publicMethod: function(){
+      return privateMethod()
+    }
   };
 })();
 
+module.publicMethod()
 
 
 ////////// PROBLEM 7 //////////
