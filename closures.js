@@ -170,15 +170,22 @@ module.publicMethod()
 /*
   Here we have a function named secretNumber that has a secret number.
   Inside the return object, create two methods called addToSecret and takeAwayFromSecret.
-  addToSecret should have a parameter that is added to the secret number returning the updated secret number.
-  takeAwayFromSecret should have a parameter that takes away from the secret number returning the updated secret number.
+  addToSecret should have a parameter that is added to the secret number returning the updated secret 
+  number.
+  takeAwayFromSecret should have a parameter that takes away from the secret number returning the 
+  updated secret number.
 */
 
 function secretNumber() {
   var secret = 143;
 
   return {
-    // Code here
+    addToSecret: function(number){
+      return secret += number
+    },
+    takeAwayFromSecret: function(number){
+      return secret -= number 
+    }
   };
 }
 
@@ -196,7 +203,8 @@ function secretNumber() {
     4 seconds after call - log 4
     5 seconds after call - log 5
 
-  However, because each call to console.log occurs after the loop has finished, the value of i has changed before the console.log executes.
+  However, because each call to console.log occurs after the loop has finished, 
+  the value of i has changed before the console.log executes.
   We'll need to use a closure to preserve a reference to i at the time of execution.
   
   Fix the code below to log the desired output.
@@ -204,9 +212,12 @@ function secretNumber() {
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000);
+    function counter(holder) {
+      setTimeout(function() {
+        console.log(holder);
+      }, holder * 1000);
+    }
+  counter(i);
   }
 }
 timeOutCounter();
