@@ -106,6 +106,7 @@ class ProgressiveManager extends Manager {
     this.bonus = 0;
   
   }
+  
   newTitle(employee){
     if(this.reports.length === 0){
       this.title = 'Not a manager'
@@ -122,7 +123,6 @@ class ProgressiveManager extends Manager {
     }
   }
 
-
   hire(newEmployee){
     super.hire(newEmployee)
     this.newTitle()
@@ -132,8 +132,7 @@ class ProgressiveManager extends Manager {
     super.fire(index)
     this.bonus += 100;
     this.newTitle(); 
-  }
-  
+  } 
 }
 
 
